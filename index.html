@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SOC Analyst Study Plan — Free Track</title>
+<meta name="description" content="A free week-by-week study plan toward Security+ and a SOC Analyst role.">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#132132">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SOC Plan">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F6FA; --panel:#FFFFFF; --grid:#DCE3EE;
+    --ink:#132132; --ink-soft:#3C4B60; --muted:#6B7A90; --line:#D5DEEA;
+    --accent:#E7A230; --accent-deep:#C9871A; --signal:#0E8C8C; --signal-soft:#E3F2F1;
+    --shadow:0 1px 2px rgba(19,33,50,.05), 0 10px 30px -12px rgba(19,33,50,.16);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/28px 28px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/28px 28px,
+      var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', system-ui, sans-serif; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--signal);text-decoration:none;}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px;}
+
+  /* header */
+  header{padding:52px 0 22px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--signal);font-weight:500;display:inline-flex;align-items:center;gap:8px;}
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--signal);}
+  h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.9rem,5.5vw,2.9rem);letter-spacing:-.02em;margin:16px 0 6px;line-height:1.05;}
+  .sub{color:var(--ink-soft);max-width:560px;font-size:1rem;}
+
+  /* progress panel */
+  .progress-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:22px 24px;margin:26px 0 8px;position:sticky;top:12px;z-index:5;}
+  .progress-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .progress-label{font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+  .progress-num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;color:var(--ink);}
+  .progress-num span{color:var(--accent);}
+  .bar{height:10px;background:var(--bg);border:1px solid var(--line);border-radius:100px;margin-top:14px;overflow:hidden;}
+  .bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--signal),var(--accent));border-radius:100px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+  .reset{margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:.76rem;color:var(--muted);background:none;border:none;cursor:pointer;padding:2px 0;text-decoration:underline;text-underline-offset:3px;}
+  .reset:hover{color:var(--accent-deep);}
+
+  /* phase */
+  .phase{margin:38px 0 0;}
+  .phase-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .phase-tag{font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.08em;color:#fff;background:var(--ink);padding:4px 10px;border-radius:6px;white-space:nowrap;}
+  .phase-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.3rem;letter-spacing:-.01em;}
+  .phase-weeks{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--muted);}
+  .phase-goal{color:var(--ink-soft);font-size:.95rem;margin:8px 0 4px;}
+
+  /* week block */
+  .week{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;box-shadow:var(--shadow);padding:16px 18px;margin-top:14px;}
+  .week-h{font-family:'IBM Plex Mono',monospace;font-size:.8rem;letter-spacing:.06em;color:var(--signal);font-weight:500;margin-bottom:10px;text-transform:uppercase;}
+
+  /* task */
+  .task{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-top:1px solid #EEF2F8;}
+  .task:first-of-type{border-top:none;}
+  .task input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:21px;height:21px;margin-top:2px;border:2px solid var(--line);border-radius:6px;cursor:pointer;position:relative;transition:border-color .15s,background .15s;background:#fff;}
+  .task input:hover{border-color:var(--signal);}
+  .task input:checked{background:var(--signal);border-color:var(--signal);}
+  .task input:checked::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg);}
+  .task-body{flex:1;}
+  .task-txt{font-size:.96rem;color:var(--ink);transition:color .2s;}
+  .task input:checked ~ .task-body .task-txt{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line);}
+  .res{display:inline-flex;align-items:center;gap:5px;margin-top:5px;margin-right:7px;font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--signal);background:var(--signal-soft);border:1px solid #CFE7E5;border-radius:6px;padding:3px 8px;transition:background .15s;}
+  .res:hover{background:#D3EEEC;}
+  .res::before{content:"↗";font-size:.7rem;}
+  .note{font-size:.82rem;color:var(--muted);margin-top:5px;font-style:italic;}
+
+  /* milestone */
+  .milestone{margin-top:16px;background:linear-gradient(var(--signal-soft),#fff);border:1px dashed var(--signal);border-radius:12px;padding:14px 18px;font-size:.9rem;color:var(--ink-soft);}
+  .milestone b{color:var(--signal);font-family:'Space Grotesk',sans-serif;}
+
+  /* done banner */
+  .done-banner{display:none;background:var(--ink);color:#fff;border-radius:14px;padding:20px 24px;margin:30px 0;box-shadow:var(--shadow);}
+  .done-banner.show{display:block;}
+  .done-banner b{color:var(--accent);}
+
+  footer{padding:34px 0 60px;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:.76rem;text-align:center;line-height:1.7;}
+
+  :focus-visible{outline:2px solid var(--signal);outline-offset:2px;border-radius:6px;}
+
+  @media (max-width:560px){
+    header{padding:38px 0 16px;}
+    .progress-card{position:static;padding:18px;}
+    .task input{width:24px;height:24px;}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="eyebrow">Leonard De Guzman · Free Track</span>
+    <h1>SOC Analyst Study Plan</h1>
+    <p class="sub">A ~16-week path to Security+ and your first Security Operations Center role — built entirely from free resources. Aim for 8–12 hrs/week around work and school. Tick tasks as you go; your progress saves automatically.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="progress-card">
+    <div class="progress-top">
+      <span class="progress-label">Overall progress</span>
+      <span class="progress-num" id="pnum"><span id="pdone">0</span> / <span id="ptotal">0</span></span>
+    </div>
+    <div class="bar"><div class="bar-fill" id="pfill"></div></div>
+    <button class="reset" id="reset">Reset all progress</button>
+  </div>
+
+  <div class="done-banner" id="doneBanner">
+    🎯 <b>Plan complete.</b> You've built the theory, the hands-on proof, and the portfolio. Time to apply to SOC roles — and ping me to re-angle your resume and LinkedIn for the target.
+  </div>
+
+  <div id="plan"></div>
+
+  <footer>
+    Built for Leonard De Guzman · Marikina City, PH<br>
+    Only paid item on this plan: the Security+ exam voucher — chase the student discount.
+  </footer>
+</div>
+
+<script>
+/* ---------- storage adapter: window.storage → localStorage → memory ---------- */
+const KEY = 'soc_plan_progress';
+const mem = {};
+const store = {
+  async get(){
+    try{ if(window.storage){ const r = await window.storage.get(KEY); return r ? JSON.parse(r.value) : []; } }catch(e){}
+    try{ const v = localStorage.getItem(KEY); return v ? JSON.parse(v) : (mem[KEY]||[]); }catch(e){ return mem[KEY]||[]; }
+  },
+  async set(arr){
+    const val = JSON.stringify(arr);
+    try{ if(window.storage){ await window.storage.set(KEY, val); return; } }catch(e){}
+    try{ localStorage.setItem(KEY, val); }catch(e){ mem[KEY]=arr; }
+  }
+};
+
+/* ---------- plan data ---------- */
+const R = {
+  messer:['Professor Messer SY0-701','https://www.professormesser.com/security-plus/sy0-701/sy0-701-video/sy0-701-comptia-security-plus-course/'],
+  google:['Google Cybersecurity Cert (audit)','https://www.coursera.org/professional-certificates/google-cybersecurity'],
+  cisco:['Cisco: Intro to Cybersecurity','https://www.netacad.com/'],
+  thm:['TryHackMe','https://tryhackme.com/'],
+  thmSoc:['TryHackMe: SOC Level 1','https://tryhackme.com/'],
+  letsdefend:['LetsDefend','https://letsdefend.io/'],
+  btlo:['Blue Team Labs Online','https://blueteamlabs.online/'],
+  cyberdef:['CyberDefenders','https://cyberdefenders.org/'],
+  cybrary:['Cybrary (free)','https://www.cybrary.it/free-content'],
+  splunk:['Splunk Free','https://www.splunk.com/'],
+  wazuh:['Wazuh','https://wazuh.com/'],
+  wireshark:['Wireshark','https://www.wireshark.org/'],
+  comptia:['CompTIA Security+','https://www.comptia.org/certifications/security'],
+};
+function res(k){ const r=R[k]; return `<a class="res" href="${r[1]}" target="_blank" rel="noopener">${r[0]}</a>`; }
+
+const PLAN = [
+  {
+    tag:'PHASE 1', title:'Foundations', weeks:'Weeks 1–4',
+    goal:'Build the base every SOC concept sits on: networking, operating systems, and core security ideas. Your CompE coursework overlaps a lot here.',
+    blocks:[
+      {h:'Week 1 — Get oriented', tasks:[
+        {t:'Start the Google Cybersecurity Certificate — audit "Foundations of Cybersecurity" (free)', r:['google']},
+        {t:'Watch Cisco "Introduction to Cybersecurity" for a gentle overview', r:['cisco']},
+        {t:'Create a dedicated GitHub repo named "soc-journey" to log everything you learn', r:[]},
+      ]},
+      {h:'Week 2 — Networking basics', tasks:[
+        {t:'Google Cert: "Play It Safe" + "Connect and Protect" (networks, TCP/IP, DNS, ports)', r:['google']},
+        {t:'Begin Professor Messer SY0-701 — Domain 1 (General Security Concepts)', r:['messer']},
+      ]},
+      {h:'Week 3 — Operating systems & tools', tasks:[
+        {t:'Google Cert: "Tools of the Trade" (Linux command line + SQL)', r:['google']},
+        {t:'Practice basic Linux commands in a free browser terminal', r:[]},
+      ]},
+      {h:'Week 4 — Threats & vulnerabilities', tasks:[
+        {t:'Messer SY0-701 — Domain 2 (Threats, Vulnerabilities & Mitigations)', r:['messer']},
+        {t:'Write a short GitHub note summarizing the CIA triad and common attack types in your own words', r:[]},
+      ]},
+    ],
+    milestone:'You can explain networking basics, the CIA triad, and common threats — the shared vocabulary of every SOC.'
+  },
+  {
+    tag:'PHASE 2', title:'Security+ core', weeks:'Weeks 5–10',
+    goal:'Work through the full Security+ objectives. Videos build understanding; practice questions build exam-readiness. Do both.',
+    blocks:[
+      {h:'Week 5 — Architecture', tasks:[
+        {t:'Messer SY0-701 — Domain 3 (Security Architecture)', r:['messer']},
+        {t:'Join Professor Messer\'s free monthly Study Group Q&A', r:['messer']},
+      ]},
+      {h:'Week 6 — Operations', tasks:[
+        {t:'Messer SY0-701 — Domain 4 (Security Operations) — most relevant to SOC work', r:['messer']},
+        {t:'Google Cert: "Sound the Alarm" (detection & response)', r:['google']},
+      ]},
+      {h:'Week 7 — Governance', tasks:[
+        {t:'Messer SY0-701 — Domain 5 (Program Management & Oversight)', r:['messer']},
+        {t:'Start a first pass of free practice questions to find weak spots', r:[]},
+      ]},
+      {h:'Weeks 8–9 — Reinforce', tasks:[
+        {t:'Re-watch Messer videos on your weakest domains', r:['messer']},
+        {t:'Use Cybrary\'s free Security+ prep path as a second explanation source', r:['cybrary']},
+        {t:'Do 200–300 practice questions total; log scores by domain', r:[]},
+      ]},
+      {h:'Week 10 — Mock exams', tasks:[
+        {t:'Take timed full-length practice exams; aim to consistently pass before booking', r:[]},
+        {t:'Check current CompTIA academic/student voucher discount', r:['comptia']},
+      ]},
+    ],
+    milestone:'You are scoring consistently on practice exams and ready to schedule Security+.'
+  },
+  {
+    tag:'PHASE 3', title:'Hands-on blue team', weeks:'Weeks 7–14 (overlap)',
+    goal:'This is what actually gets you hired. Do real SOC-style investigations and document every one on GitHub. Start alongside Phase 2.',
+    blocks:[
+      {h:'Weeks 7–10 — Guided labs', tasks:[
+        {t:'Work through the free rooms in TryHackMe\'s SOC Level 1 path (SIEM, Wireshark, phishing, log analysis, MITRE ATT&CK)', r:['thmSoc']},
+        {t:'Write a short GitHub write-up for each room: what you investigated and what you found', r:[]},
+      ]},
+      {h:'Weeks 11–12 — SOC simulator', tasks:[
+        {t:'Investigate alerts in LetsDefend\'s free tier (real-format SOC cases)', r:['letsdefend']},
+        {t:'Document 3–5 investigations end-to-end in your repo', r:[]},
+      ]},
+      {h:'Weeks 13–14 — Build a home lab', tasks:[
+        {t:'Stand up a free SIEM — Splunk Free or Wazuh — and ingest your own logs', r:['splunk']},
+        {t:'Analyze sample traffic in Wireshark and note what normal vs suspicious looks like', r:['wireshark']},
+        {t:'Try a few Blue Team Labs Online / CyberDefenders free challenges', r:['btlo']},
+      ]},
+    ],
+    milestone:'Your GitHub shows real investigations and a working home lab — concrete proof you can discuss in interviews.'
+  },
+  {
+    tag:'PHASE 4', title:'Exam & job launch', weeks:'Weeks 13–16',
+    goal:'Convert the work into a cert, a portfolio, and applications into the BPO SOC pipeline you already know.',
+    blocks:[
+      {h:'Week 13 — Book it', tasks:[
+        {t:'Buy your discounted Security+ voucher and schedule the exam', r:['comptia']},
+      ]},
+      {h:'Week 14 — Take Security+', tasks:[
+        {t:'Sit the SY0-701 exam', r:[]},
+        {t:'Add the certification to LinkedIn and your resume', r:[]},
+      ]},
+      {h:'Week 15 — Portfolio polish', tasks:[
+        {t:'Tidy your GitHub: clear README, organized write-ups, home-lab screenshots', r:[]},
+        {t:'Ask Claude to re-angle your resume & LinkedIn for SOC Analyst roles', r:[]},
+      ]},
+      {h:'Week 16 — Apply', tasks:[
+        {t:'Apply to junior/L1 SOC roles at BPO security-delivery firms (Accenture, Concentrix, IBM, Cognizant) via JobStreet', r:[]},
+        {t:'Reach out to your existing BPO network for internal security-team openings', r:[]},
+      ]},
+    ],
+    milestone:'Certified, portfolio ready, and applying. From here it compounds — L1 first, specialize later.'
+  },
+];
+
+/* ---------- render ---------- */
+let TOTAL = 0;
+const planEl = document.getElementById('plan');
+let idc = 0;
+PLAN.forEach(ph=>{
+  const sec = document.createElement('section');
+  sec.className='phase';
+  let html = `<div class="phase-head"><span class="phase-tag">${ph.tag}</span><span class="phase-title">${ph.title}</span><span class="phase-weeks">${ph.weeks}</span></div>
+    <p class="phase-goal">${ph.goal}</p>`;
+  ph.blocks.forEach(bl=>{
+    html += `<div class="week"><div class="week-h">${bl.h}</div>`;
+    bl.tasks.forEach(tk=>{
+      const id='t'+(idc++); TOTAL++;
+      const chips = (tk.r||[]).map(res).join('');
+      html += `<label class="task" for="${id}">
+        <input type="checkbox" id="${id}" data-id="${id}">
+        <span class="task-body"><span class="task-txt">${tk.t}</span>${chips?('<br>'+chips):''}${tk.note?('<div class="note">'+tk.note+'</div>'):''}</span>
+      </label>`;
+    });
+    html += `</div>`;
+  });
+  html += `<div class="milestone">✔ <b>Checkpoint:</b> ${ph.milestone}</div>`;
+  sec.innerHTML = html;
+  planEl.appendChild(sec);
+});
+
+/* ---------- state ---------- */
+const boxes = [...document.querySelectorAll('.task input')];
+const pdone=document.getElementById('pdone'), ptotal=document.getElementById('ptotal'),
+      pfill=document.getElementById('pfill'), banner=document.getElementById('doneBanner');
+ptotal.textContent = TOTAL;
+
+function refresh(){
+  const done = boxes.filter(b=>b.checked).length;
+  pdone.textContent = done;
+  pfill.style.width = (TOTAL? (done/TOTAL*100):0)+'%';
+  banner.classList.toggle('show', done===TOTAL && TOTAL>0);
+}
+async function save(){ await store.set(boxes.filter(b=>b.checked).map(b=>b.dataset.id)); }
+
+boxes.forEach(b=>b.addEventListener('change', async()=>{ refresh(); await save(); }));
+
+document.getElementById('reset').addEventListener('click', async()=>{
+  if(!confirm('Clear all your ticked tasks? This cannot be undone.')) return;
+  boxes.forEach(b=>b.checked=false); refresh(); await save();
+});
+
+(async function init(){
+  const saved = await store.get();
+  const set = new Set(saved||[]);
+  boxes.forEach(b=>{ if(set.has(b.dataset.id)) b.checked=true; });
+  refresh();
+})();
+
+/* ---------- PWA: register service worker for offline + install ---------- */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
+}
+</script>
+</body>
+</html>
